@@ -1,0 +1,20 @@
+---
+- name: Install Nginx
+  hosts: prd
+  become: yes
+
+  tasks:
+    - name: Enable Amazon Linux Extras for Nginx
+      command: amazon-linux-extras enable nginx1
+
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: latest
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+

@@ -1,0 +1,18 @@
+---
+- name: Deploy index.html to multiple servers
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Copy index.html to /usr/share/nginx/html
+      copy:
+        src: /home/ec2-user/playbook/index.html  # Local file on Ansible control node
+        dest: /usr/share/nginx/html
+
+
+    - name: Copy index.html to /var/www/html
+      copy:
+        src: /home/ec2-user/playbook/index.html  # Local file on Ansible control node
+        dest: /var/www/html
+      
+  

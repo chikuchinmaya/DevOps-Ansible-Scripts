@@ -1,0 +1,43 @@
+---
+- name: Configure Nginx on Amazon Linux
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: latest
+
+    - name: Update Nginx configuration
+      copy:
+        content: |
+          user nginx;
+          worker_processes auto;
+          error_log /var/log/nginx/error.log;
+          pid /run/nginx.pid;
+          
+          events {
+            worker_connections 1024;
+          }
+
+          http {
+            server {
+              listen 8080; # 🔥 Change the port here
+              server_name localhost;
+              location / {
+                root /usr/share/nginx/html;
+                index index.html index.htm;
+              }
+            }
+          }
+        dest: /etc/nginx/nginx.conf
+        backup: yes
+
+    - name: Restart Nginx service
+      systemd:
+        name: nginx
+        state: restarted
+        enabled: yes
+
+
