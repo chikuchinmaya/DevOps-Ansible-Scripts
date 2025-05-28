@@ -15,6 +15,9 @@ Ansible is an open-source automation tool used for configuration management, app
 ## Installation on Amazon Linux 2
 To install Ansible on an Amazon Linux 2 AMI, follow these steps:
 
+![EC2 Servers](media/all_server_aws.png)
+
+
 ```bash
 sudo amazon-linux-extras enable ansible2
 sudo yum install -y ansible
@@ -23,6 +26,8 @@ ansible --version
 
 Configuring the Hosts File
 Update the /etc/ansible/hosts file with the following configuration:
+
+![](media/config_host.png).
 
 ```bash
 [servers]
@@ -52,6 +57,11 @@ Verify connectivity to configured servers with:
 ansible servers -m ping
 ansible servers -a "free -h"
 ```
+
+![Update](media/update_cmd.png)
+![ping](media/ping.png).
+![RAM](media/ram.png)
+
 Playbooks
 Below are the playbooks included in this repository:
 
@@ -63,6 +73,7 @@ Run Command:
 ```bash
 ansible-playbook date_play.yml
 ```
+![Date & UP Time](media/date_py.png).
 
 2. install_httpd_play.yml
 Installs and starts the HTTPD server on port 80.
@@ -103,6 +114,6 @@ ansible-playbook web_play.yml
 Expected Output: Once this playbook runs successfully, access the deployed web pages using:
 
 HTTPD Server: http://your_public_ip:80
-
+![](media/httpd_output.png).
 Nginx Server: http://your_public_ip:8080
-
+![](media/nginx_output.png).
